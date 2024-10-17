@@ -1,1 +1,10 @@
 .DS_Store
+venv/
+venv*
+venv_gpu/
+venv_test/
+venv_docs/
+__pycache__/
+jupyter.sh
+jupyter_gpu.sh
+*.pkl
