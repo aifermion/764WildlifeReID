@@ -1,0 +1,40 @@
+# For adding to WildlifeDatasets
+
+*Note*: ensure that the python environment is ver 3.8 and that wildlife tools were downloaded
+
+1. navigate to the **datasets.py** file in `/Library/anaconda3/envs/compsci764/lib/python3.8/site-packages/wildlife_datasets/datasets/datasets.py`
+
+2. add the following:
+
+```py
+class FeralCatsAkl(DatasetFactory):
+    def create_catalogue(self) -> pd.DataFrame:
+        # Update these Paths
+        dataset_folder = "/Users/fmb/GitHub/764WildlifeReID/data/processed/cropped"
+        labels_file = "/Users/fmb/GitHub/764WildlifeReID/data/labels/cropped_auckland_island_feralcats_df.csv"
+
+        feral_cats = pd.read_csv(labels_file)
+
+        # Load the labels
+        df = pd.DataFrame({
+            'image_id': feral_cats['image_id'],
+            'identity': feral_cats['identity'],
+            'path': feral_cats['path'],
+        })
+
+        df['path'] = df['path'].apply(lambda x: os.path.join(dataset_folder, x))
+
+        return df
+```
+
+3. Make necessary changes to `__init__.py` at `/Library/anaconda3/envs/compsci764/lib/python3.8/site-packages/wildlife_datasets/datasets`
+
+```py
+from .datasets import FeralCatsAkl
+
+# add FeralCatsAkl to Wildlife to names_all
+```
+
+4. Test out the `dataset_upload.ipynb` in the setup folder
+
+
