@@ -1,0 +1,1 @@
+Megadescriptor notebooks adapted from https://github.com/WildlifeDatasets/wildlife-tools/tree/main/baselines

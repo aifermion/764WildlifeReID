@@ -8,3 +8,4 @@ __pycache__/
 jupyter.sh
 jupyter_gpu.sh
 *.pkl
+data/raw/regrouped/*
