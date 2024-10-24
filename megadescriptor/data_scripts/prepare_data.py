@@ -18,11 +18,13 @@ def resize_dataset(dataset_factory, new_root, size, img_load="bbox", unique_path
     """
 
     dataset = WildlifeDataset(
-        dataset_factory.df,
-        dataset_factory.root,
+        dataset_factory.df, # metadata
+        dataset_factory.root, # root
         transform=T.Resize(size=size),
         img_load=img_load,
     )
+
+    print(dataset.metadata.shape)
 
     for i in tqdm(range(len(dataset)), mininterval=1, ncols=100):
         image, _ = dataset[i]
@@ -55,6 +57,30 @@ def save_dataframe(dataset_factory, new_root):
     df_simplified = dataset_factory.df[["image_id", "identity", "path"]]
     assert type(df_simplified.index) == pd.RangeIndex
     df_simplified.to_csv(os.path.join(new_root, "annotations.csv"))
+
+
+def prepare_feralcatsakl_base(root, new_root="data/FeralCatsAkl", size=256):
+    dataset_factory = datasets.FeralCatsAkl(root)
+    resize_dataset(dataset_factory, new_root, size=size, img_load="full")
+    save_dataframe(dataset_factory, new_root)
+
+
+def prepare_feralcatsakl_maxim(root, new_root="data/FeralCatsAkl_Maxim", size=256):
+    dataset_factory = datasets.FeralCatsAkl_Maxim(root)
+    resize_dataset(dataset_factory, new_root, size=size, img_load="full")
+    save_dataframe(dataset_factory, new_root)
+
+
+def prepare_feralcatsakl_hidiff(root, new_root="data/FeralCatsAkl_HIDiff", size=256):
+    dataset_factory = datasets.FeralCatsAkl_HIDiff(root)
+    resize_dataset(dataset_factory, new_root, size=size, img_load="full")
+    save_dataframe(dataset_factory, new_root)
+
+
+def prepare_feralcatsakl_srmnet(root, new_root="data/FeralCatsAkl_SRMNet", size=256):
+    dataset_factory = datasets.FeralCatsAkl_SRMNet(root)
+    resize_dataset(dataset_factory, new_root, size=size, img_load="full")
+    save_dataframe(dataset_factory, new_root)
 
 
 def prepare_sea_turtle_id_heads(root, new_root="data/SeaTurtleIDHeads", size=256):
