@@ -9,4 +9,9 @@ jupyter.sh
 jupyter_gpu.sh
 *.pkl
 data/raw/regrouped/*
+megadescriptor/models/backbone.pth
+megadescriptor/models/md_baseline.pth
+megadescriptor/models/md_hidiff.pth
+megadescriptor/models/md_maxim.pth
+megadescriptor/models/md_srmnet.pth
 .conda/*
